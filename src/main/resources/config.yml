@@ -1,5 +1,7 @@
 options:
   auto-update: true
+  check-radius: 8
+  max-mobs-in-range: 6
 mobs:
 - BLAZE
 - CAVE_SPIDER

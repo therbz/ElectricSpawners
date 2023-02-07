@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.thebusybiscuit</groupId>
     <artifactId>ElectricSpawners</artifactId>
-    <version>UNOFFICIAL</version>
+    <version>DEV - 23 (therbz)</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

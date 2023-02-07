@@ -35,7 +35,9 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
 
     private final EntityType entity;
 
-    public ElectricSpawner(ItemGroup category, String mob, EntityType type, Research research) {
+    private final ElectricSpawners main;
+
+    public ElectricSpawner(ItemGroup category, String mob, EntityType type, Research research, ElectricSpawners main) {
         // @formatter:off
         super(category, new SlimefunItemStack("ELECTRIC_SPAWNER_" + mob, "db6bd9727abb55d5415265789d4f2984781a343c68dcaf57f554a5e9aa1cd",
                 "&ePowered Spawner &7(" + ChatUtils.humanize(mob) + ")",
@@ -49,6 +51,8 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
                 SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.LARGE_CAPACITOR, SlimefunItems.BLISTERING_INGOT_3
         });
         // @formatter:on
+
+        this.main = main;
 
         this.entity = type;
 
@@ -129,7 +133,8 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
         }
 
         int count = 0;
-        for (Entity n : b.getWorld().getNearbyEntities(b.getLocation(), 4.0, 4.0, 4.0)) {
+        double checkRadius = main.getConfig().getDouble("options.check-radius");
+        for (Entity n : b.getWorld().getNearbyEntities(b.getLocation(), checkRadius, checkRadius, checkRadius)) {
             if (n.getType().equals(this.entity)) {
                 count++;
 
