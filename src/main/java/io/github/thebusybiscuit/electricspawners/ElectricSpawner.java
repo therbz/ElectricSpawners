@@ -135,12 +135,17 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
         int count = 0;
         double checkRadius = main.getConfig().getDouble("options.check-radius");
         for (Entity n : b.getWorld().getNearbyEntities(b.getLocation(), checkRadius, checkRadius, checkRadius)) {
-            if (n.getType().equals(this.entity)) {
-                count++;
-
-                if (count > 6) {
-                    return;
+            // If we look for mobs of the same type
+            if (!main.getConfig().getBoolean("options.any-mob")) {
+                if (n.getType().equals(this.entity)) {
+                    count++;
                 }
+            } else { // If we look for any
+                count++;
+            }
+
+            if (count > main.getConfig().getDouble("options.max-mobs-in-range")) {
+                return;
             }
         }
 

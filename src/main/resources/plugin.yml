@@ -6,3 +6,11 @@ depend: [Slimefun]
 api-version: 1.13
 
 main: io.github.thebusybiscuit.electricspawners.ElectricSpawners
+
+commands:
+  electricspawners:
+    usage: /electricspawners <reload>
+
+permissions:
+  electricspawners.reload:
+    default: op
