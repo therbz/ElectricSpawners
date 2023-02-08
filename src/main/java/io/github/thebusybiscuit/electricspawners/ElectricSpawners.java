@@ -1,13 +1,14 @@
 package io.github.thebusybiscuit.electricspawners;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 
 import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import org.bukkit.command.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,7 +23,7 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerSkin;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.updater.GitHubBuildsUpdater;
 
-public class ElectricSpawners extends JavaPlugin implements Listener, SlimefunAddon, CommandExecutor {
+public class ElectricSpawners extends JavaPlugin implements Listener, SlimefunAddon, CommandExecutor, TabCompleter {
 
     @Override
     public void onEnable() {
@@ -51,7 +52,9 @@ public class ElectricSpawners extends JavaPlugin implements Listener, SlimefunAd
 
         research.register();
 
-        this.getCommand("electricspawners").setExecutor(this);
+        PluginCommand cmd = Objects.requireNonNull(this.getCommand("electricspawners"));
+        cmd.setExecutor(this);
+        cmd.setTabCompleter(this);
     }
 
     @Override
@@ -74,5 +77,12 @@ public class ElectricSpawners extends JavaPlugin implements Listener, SlimefunAd
         this.reloadConfig();
         sender.sendMessage(ChatColor.GREEN + "Reloaded ElectricSpawners.");
         return true;
+    }
+
+    @EventHandler
+    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+        List<String> list = new ArrayList<>();
+        list.add("reload");
+        return list;
     }
 }
