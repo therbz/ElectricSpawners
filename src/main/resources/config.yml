@@ -2,7 +2,8 @@ options:
   auto-update: true
   check-radius: 8
   max-mobs-in-range: 6
-  any-mob: false
+  count-any-mob-torwards-max: false
+  energy-consumption: 240
 mobs:
 - BLAZE
 - CAVE_SPIDER

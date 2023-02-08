@@ -30,7 +30,6 @@ import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 
 public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements EnergyNetComponent {
 
-    private static final int ENERGY_CONSUMPTION = 240;
     private static int lifetime = 0;
 
     private final EntityType entity;
@@ -116,7 +115,7 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
     }
 
     public int getEnergyConsumption() {
-        return ENERGY_CONSUMPTION;
+        return main.getConfig().getInt("energy-consumption");
     }
 
     protected void tick(Block b) {
@@ -136,7 +135,7 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
         double checkRadius = main.getConfig().getDouble("options.check-radius");
         for (Entity n : b.getWorld().getNearbyEntities(b.getLocation(), checkRadius, checkRadius, checkRadius)) {
             // If we look for mobs of the same type
-            if (!main.getConfig().getBoolean("options.any-mob")) {
+            if (!main.getConfig().getBoolean("options.count-any-mob-torwards-max")) {
                 if (n.getType().equals(this.entity)) {
                     count++;
                 }
