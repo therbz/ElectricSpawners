@@ -115,7 +115,7 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
     }
 
     public int getEnergyConsumption() {
-        return main.getConfig().getInt("energy-consumption");
+        return main.getConfig().getInt("options.energy-consumption");
     }
 
     protected void tick(Block b) {
